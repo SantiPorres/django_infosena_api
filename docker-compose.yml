@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+  pgdb:
+    container_name: pgdb
+    image: postgres:16rc1
+    environment:
+      - POSTGRES_DB=infosena
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
+    restart: "always"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./pgdb:/var/lib/postgresql/data
+    networks:
+      - sena_network
+    deploy:
+      resources:
+        limits:
+          cpus: "0"
+          memory: "2000m"
+        reservations:
+          cpus: "1"
+          memory: "2000m"
+
+  backend: 
+    container_name: backend
+    build:
+      context: django_api/
+      dockerfile: Dockerfile
+    command: bash -c 'python manage.py migrate && python manage.py runserver 0.0.0.0:80'
+    restart: "always"
+    volumes:
+      - ./django_api/:/home/src/django_api
+    ports:
+      - "8000:8000"
+    depends_on:
+      pgdb:
+        condition: service_healthy
+    networks:
+      - sena_network
+    deploy:
+      resources:
+        limits:
+          cpus: "0"
+          memory: "500m"
+        reservations:
+          cpus: "1"
+          memory: "500m"
+
+networks:
+  sena_network:
+    name: sena_network

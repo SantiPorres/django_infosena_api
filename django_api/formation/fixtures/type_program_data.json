@@ -1,0 +1,37 @@
+[
+    {
+        "model": "formation.TypeProgram",
+        "pk": 1,
+        "fields": {
+            "type_program": "técnico"
+        }
+    },
+    {
+        "model": "formation.TypeProgram",
+        "pk": 2,
+        "fields": {
+            "type_program": "tecnólogo"
+        }
+    },
+    {
+        "model": "formation.TypeProgram",
+        "pk": 3,
+        "fields": {
+            "type_program": "operador"
+        }
+    },
+    {
+        "model": "formation.TypeProgram",
+        "pk": 4,
+        "fields": {
+            "type_program": "especialización"
+        }
+    },
+    {
+        "model": "formation.TypeProgram",
+        "pk": 5,
+        "fields": {
+            "type_program": "auxiliar"
+        }
+    }
+]
