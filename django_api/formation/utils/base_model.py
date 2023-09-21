@@ -11,7 +11,7 @@ class AbstractModel(models.Model):
         INACTIVE = "inactive", "Inactivo"
     
     # Fields or columns to database
-    description = models.TextField(verbose_name = "descripción", max_length = 250)
+    description = models.TextField(verbose_name = "descripción", max_length = 1000)
     status = models.CharField(verbose_name = "estado de disponibilidad", max_length = 10, choices = Status.choices, default = Status.ACTIVE)
     image = models.ImageField(verbose_name = "imagen", upload_to = upload_image, default = "default.png")
     
