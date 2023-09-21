@@ -2,6 +2,7 @@ from formation.serializers.formation_area_serializer import FormationAreaSeriali
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
+
 class FormationAreaViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
